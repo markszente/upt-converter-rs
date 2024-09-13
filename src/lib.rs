@@ -1,8 +1,9 @@
+use error::convert::ConvertError;
 use model::Collection;
 use serde::Deserialize;
 use serde_derive::{Deserialize, Serialize};
 use serde_xml_rs::{de::Deserializer, from_str, to_string};
-use std::{collections::VecDeque, error::Error, fs};
+use std::{collections::VecDeque, error::Error, fs, path::Path};
 use unipol::{Export, Folder};
 use utf16string::{WStr, LE};
 
@@ -11,20 +12,27 @@ mod error;
 mod model;
 mod unipol;
 
-fn open_utf16_file(path: &str) -> Result<Vec<u8>, Box<dyn Error>> {
+pub fn get_export_from_path<P: AsRef<Path>>(path: P) -> Result<Export, ConvertError> {
+    let utf16 = open_utf16_file(path)?;
+    let content = convert_to_utf8(&utf16)?;
+    let result = convert_raw(&content)?;
+    Ok(result)
+}
+
+fn open_utf16_file<P: AsRef<Path>>(path: P) -> Result<Vec<u8>, ConvertError> {
     let result = fs::read(path)?;
     Ok(result)
 }
 
 /// Converts a UTF16LE file to String
-fn convert_to_utf8(utf16: &[u8]) -> Result<String, Box<dyn Error>> {
+fn convert_to_utf8(utf16: &[u8]) -> Result<String, ConvertError> {
     let s0: &WStr<LE> = WStr::from_utf16(utf16)?;
 
     let content = s0.to_utf8();
     Ok(content)
 }
 
-fn convert_raw(content: &str) -> Result<Export, Box<dyn Error>> {
+fn convert_raw(content: &str) -> Result<Export, ConvertError> {
     let result: Export = from_str(content)?;
     Ok(result)
 }

@@ -5,6 +5,33 @@ use crate::{
     model::{Answer, AnswerWrapper, Question, QuestionType},
 };
 
+/// Converts a single folder into a list of questions
+pub fn get_all_questions_from_folder(
+    folder: &crate::unipol::Folder,
+) -> Vec<Result<Question, QuestionError>> {
+    let questions = match &folder.questions {
+        Some(question_wrapper) => {
+            let questions = question_wrapper
+                .question
+                .iter()
+                .flatten()
+                .map(|q| Question::try_from(q))
+                .collect();
+            questions
+        }
+        None => vec![],
+    };
+    questions
+}
+
+/// Converts a single folder into a list of questions, omitting invalid questions
+pub fn get_valid_questions_from_folder(folder: &crate::unipol::Folder) -> Vec<Question> {
+    get_all_questions_from_folder(folder)
+        .into_iter()
+        .filter_map(|q| q.ok())
+        .collect()
+}
+
 impl TryFrom<&crate::unipol::Question> for Question {
     type Error = QuestionError;
 
