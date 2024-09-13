@@ -5,6 +5,8 @@ use serde;
 use serde_derive;
 use serde_derive::Deserialize;
 
+use crate::error::unipol::{UnipolError, UnipolFolderError};
+
 #[derive(Deserialize)]
 pub struct Export {
     #[serde(rename = "Folder")]
@@ -12,18 +14,22 @@ pub struct Export {
 }
 
 impl Export {
-    pub fn flatten_folders(self) -> Result<Vec<Folder>, &'static str> {
+    pub fn flatten_folders(self) -> Result<Vec<Folder>, UnipolError> {
         let mut result = vec![];
         let mut q = VecDeque::new();
 
         let mut top_folders = match self.folders {
-            None => return Err(""),
+            None => return Err(UnipolError::FlattenError(UnipolFolderError::NoTopFolders)),
             Some(v) => v,
         };
 
         let top_first_folder = match top_folders.pop() {
             Some(v) => v,
-            None => return Err("none"),
+            None => {
+                return Err(UnipolError::FlattenError(
+                    UnipolFolderError::NoFirstTopFolder,
+                ))
+            }
         };
 
         q.push_back(top_first_folder);
@@ -130,9 +136,9 @@ pub struct CorrectQuestionAnswer {
 #[derive(Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct CorrectQuestionComplexAnswer {
-    pub point_value: i32,
-    pub dimension_1: i32,
-    pub dimension_2: i32,
+    pub point_value: u32,
+    pub dimension_1: u32,
+    pub dimension_2: u32,
     pub text_answer: String,
     pub answer_id: String,
 }

@@ -10,6 +10,7 @@ serde_derive = "1.0"
 serde = "1.0"
 serde-xml-rs = "0.5"
 utf16string = "0.2"
+thiserror = "1.0.63"
 
 [dev-dependencies]
 criterion = "0.3"

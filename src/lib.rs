@@ -6,6 +6,8 @@ use std::{collections::VecDeque, error::Error, fs};
 use unipol::{Export, Folder};
 use utf16string::{WStr, LE};
 
+mod convert;
+mod error;
 mod model;
 mod unipol;
 

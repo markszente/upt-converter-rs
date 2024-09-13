@@ -206,7 +206,7 @@ impl AnswerWrapper {
                                 .expect("index not found");
 
                             Answer {
-                                answer_index: index as i32,
+                                answer_index: index as u32,
                                 option_index: c.dimension_2 - 1,
                             }
                         }
@@ -230,6 +230,6 @@ impl AnswerWrapper {
 #[derive(Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Answer {
-    pub answer_index: i32,
-    pub option_index: i32,
+    pub answer_index: u32,
+    pub option_index: u32,
 }
