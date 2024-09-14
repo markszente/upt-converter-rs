@@ -3,7 +3,7 @@ use serde_derive::{self, Serialize};
 
 use crate::unipol;
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Collection {
     pub name: String,
@@ -25,7 +25,7 @@ impl Collection {
     }
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Folder {
     pub name: String,
@@ -56,7 +56,7 @@ impl Folder {
     }
 }
 
-#[derive(Deserialize, Serialize, PartialEq)]
+#[derive(Deserialize, Serialize, PartialEq, Debug, Clone, Copy)]
 #[repr(u8)]
 pub enum QuestionType {
     ExactText = 0,
@@ -81,7 +81,7 @@ impl QuestionType {
     }
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Question {
     pub text: String,
@@ -139,7 +139,7 @@ impl Question {
     }
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct AnswerWrapper {
     pub single_answer: Option<String>,
@@ -227,7 +227,7 @@ impl AnswerWrapper {
     }
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Answer {
     pub answer_index: u32,

@@ -1,29 +1,25 @@
+use std::fmt;
+
 use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum QuestionError {
     #[error("Unknown question type: {0:?}")]
-    UnknownQuestionType(QuestionTypeError),
+    UnknownQuestionType(#[from] QuestionTypeError),
     #[error("Answer error")]
-    AnswerError(AnswerError),
+    AnswerError(#[from] AnswerError),
 }
 
 #[derive(Error, Debug)]
 pub enum AnswerError {
     #[error("Unknown question type: {0:?}")]
-    UnknownQuestionType(QuestionTypeError),
+    UnknownQuestionType(#[from] QuestionTypeError),
     #[error("No correct answer")]
     NoCorrectAnswer,
     #[error("No complex answers")]
-    NoComplexAnswer(ComplexAnswerError),
+    NoComplexAnswer(#[from] ComplexAnswerError),
     #[error("No correct answers")]
-    NoPredefinedAnswer(PredefinedAnswerError),
-}
-
-impl From<AnswerError> for QuestionError {
-    fn from(error: AnswerError) -> Self {
-        QuestionError::AnswerError(error)
-    }
+    NoPredefinedAnswer(#[from] PredefinedAnswerError),
 }
 
 #[derive(Error, Debug)]
@@ -34,12 +30,6 @@ pub enum ComplexAnswerError {
     NoAnswers,
 }
 
-impl From<ComplexAnswerError> for AnswerError {
-    fn from(error: ComplexAnswerError) -> Self {
-        AnswerError::NoComplexAnswer(error)
-    }
-}
-
 #[derive(Error, Debug)]
 pub enum PredefinedAnswerError {
     #[error("No value")]
@@ -48,25 +38,13 @@ pub enum PredefinedAnswerError {
     NotFound,
 }
 
-impl From<PredefinedAnswerError> for AnswerError {
-    fn from(error: PredefinedAnswerError) -> Self {
-        AnswerError::NoPredefinedAnswer(error)
-    }
-}
-
 #[derive(Error, Debug)]
 pub struct QuestionTypeError {
     pub raw_type: String,
 }
 
-impl From<QuestionTypeError> for AnswerError {
-    fn from(error: QuestionTypeError) -> Self {
-        AnswerError::UnknownQuestionType(error)
-    }
-}
-
-impl From<QuestionTypeError> for QuestionError {
-    fn from(error: QuestionTypeError) -> Self {
-        QuestionError::UnknownQuestionType(error)
+impl fmt::Display for QuestionTypeError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Invalid question type: {}", self.raw_type)
     }
 }

@@ -1,3 +1,5 @@
+#![feature(error_generic_member_access)]
+
 use error::convert::ConvertError;
 use model::Collection;
 use serde::Deserialize;
@@ -9,6 +11,7 @@ use utf16string::{WStr, LE};
 
 mod convert;
 mod error;
+mod macros;
 mod model;
 mod unipol;
 
@@ -51,22 +54,28 @@ pub fn convert_to_folders() -> Result<(), Box<dyn Error>> {
 mod tests {
     use std::collections::HashMap;
 
+    use model::QuestionType;
+
     use crate::model::Question;
 
     use super::*;
 
     #[test]
     fn test_group() -> Result<(), Box<dyn Error>> {
-        let utf16 = open_utf16_file("A:/Chrome/Csoportosítás teszt/222600431.upt")?;
-        let content = convert_to_utf8(&utf16)?;
+        let content = include_str!("../assets/normalized/grouping.xml");
         let result = convert_raw(&content)?;
         let folders = result.flatten_folders()?;
-        // let first = result.folders;
-        // let x = flatten_folders(first.expect("empty")[0]);
-        // for y in x {
-        //     let title = &y.title;
-        //     println!("{}", title.as_ref().unwrap());
-        // }
+        let collection = Collection::from(folders);
+
+        assert_eq!(collection.folders.len(), 1);
+
+        let folder = &collection.folders[0];
+        assert_eq!(folder.questions.len(), 1);
+
+        let question = &folder.questions[0];
+
+        assert_eq!(question.question_type, QuestionType::Group);
+
         Ok(())
     }
 

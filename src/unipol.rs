@@ -7,7 +7,7 @@ use serde_derive::Deserialize;
 
 use crate::error::unipol::{UnipolError, UnipolFolderError};
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 pub struct Export {
     #[serde(rename = "Folder")]
     pub folders: Option<Vec<Folder>>,
@@ -49,7 +49,7 @@ impl Export {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Folder {
     pub title: Option<String>,
@@ -65,19 +65,19 @@ impl Folder {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct FolderWrapper {
     pub folder: Option<Vec<Folder>>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct QuestionWrapper {
     pub question: Option<Vec<Question>>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Question {
     pub title: ResourceWrapper,
@@ -89,51 +89,51 @@ pub struct Question {
     pub is_using_partial_points: bool,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct ResourceWrapper {
     pub resource: Resource,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Resource {
     pub text: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Dimension {
     pub value_set: Option<ValueSet>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct ValueSet {
     pub values: ValueWrapper,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct ValueWrapper {
     pub value: Vec<Value>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Value {
     pub resource_text: ResourceWrapper,
     pub id: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct CorrectQuestionAnswer {
     pub text_answer: String,
     pub correct_question_complex_answer: Option<Vec<CorrectQuestionComplexAnswer>>,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct CorrectQuestionComplexAnswer {
     pub point_value: u32,
