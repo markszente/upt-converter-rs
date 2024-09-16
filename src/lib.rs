@@ -10,44 +10,14 @@ use unipol::{Export, Folder};
 use utf16string::{WStr, LE};
 
 mod convert;
-mod error;
+pub mod error;
 mod macros;
-mod model;
-mod unipol;
+pub mod model;
+pub mod unipol;
 
-pub fn get_export_from_path<P: AsRef<Path>>(path: P) -> Result<Export, ConvertError> {
-    let utf16 = open_utf16_file(path)?;
-    let content = convert_to_utf8(&utf16)?;
-    let result = convert_raw(&content)?;
+pub fn convert_raw(content: &str) -> Result<crate::unipol::Export, ConvertError> {
+    let result: crate::unipol::Export = from_str(content)?;
     Ok(result)
-}
-
-fn open_utf16_file<P: AsRef<Path>>(path: P) -> Result<Vec<u8>, ConvertError> {
-    let result = fs::read(path)?;
-    Ok(result)
-}
-
-/// Converts a UTF16LE file to String
-fn convert_to_utf8(utf16: &[u8]) -> Result<String, ConvertError> {
-    let s0: &WStr<LE> = WStr::from_utf16(utf16)?;
-
-    let content = s0.to_utf8();
-    Ok(content)
-}
-
-fn convert_raw(content: &str) -> Result<Export, ConvertError> {
-    let result: Export = from_str(content)?;
-    Ok(result)
-}
-
-pub fn convert_to_folders(name: &str) -> Result<(), Box<dyn Error>> {
-    let utf16 = open_utf16_file("A:/Chrome/Csoportosítás teszt/189788754.upt")?;
-    let content = convert_to_utf8(&utf16)?;
-    let result = convert_raw(&content)?;
-    let folders = result.flatten_folders()?;
-    let collection = Collection::new(name, folders);
-    // let first = result.folders;
-    Ok(())
 }
 
 #[cfg(test)]

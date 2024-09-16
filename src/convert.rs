@@ -1,6 +1,12 @@
+use serde_xml_rs::from_str;
+
 use crate::{
-    error::model::{
-        AnswerError, ComplexAnswerError, PredefinedAnswerError, QuestionError, QuestionTypeError,
+    error::{
+        convert::ConvertError,
+        model::{
+            AnswerError, ComplexAnswerError, PredefinedAnswerError, QuestionError,
+            QuestionTypeError,
+        },
     },
     model::{Answer, AnswerWrapper, Question, QuestionType},
 };

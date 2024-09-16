@@ -5,6 +5,7 @@ use serde_derive::{self, Serialize};
 
 use crate::convert::{get_all_questions_from_folder, get_valid_questions_from_folder};
 use crate::error::model::QuestionError;
+use crate::error::unipol::UnipolError;
 use crate::unipol;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -15,17 +16,18 @@ pub struct Collection {
 }
 
 impl Collection {
-    pub fn new(name: &str, folders: Vec<unipol::Folder>) -> Collection {
+    pub fn new(name: &str, export: unipol::Export) -> Result<Collection, UnipolError> {
+        let folders = export.flatten_folders()?;
         let folders = folders
             .iter()
             .map(|f| (f, get_valid_questions_from_folder(f)))
             .map(|(folder, questions)| Folder::new(folder.title.as_ref(), questions))
             .collect();
 
-        Collection {
+        Ok(Collection {
             name: name.to_string(),
             folders,
-        }
+        })
     }
 
     /// Creates a collection with errors included
@@ -33,8 +35,9 @@ impl Collection {
     /// Errors is hash map of indices of folder (as returned in `collection.folders`) and errors
     pub fn new_with_error_details(
         name: &str,
-        folders: Vec<unipol::Folder>,
-    ) -> (Collection, HashMap<usize, Vec<QuestionError>>) {
+        export: unipol::Export,
+    ) -> Result<(Collection, HashMap<usize, Vec<QuestionError>>), UnipolError> {
+        let folders = export.flatten_folders()?;
         let (folders, errors) = folders
             .iter()
             .map(|f| (f, get_all_questions_from_folder(f)))
@@ -58,7 +61,7 @@ impl Collection {
             folders,
         };
 
-        (collection, errors)
+        Ok((collection, errors))
     }
 }
 
