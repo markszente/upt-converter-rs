@@ -1,4 +1,3 @@
-use std::backtrace;
 
 use thiserror::Error;
 use utf16string::Utf16Error;

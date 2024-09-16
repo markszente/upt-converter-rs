@@ -1,13 +1,7 @@
 #![feature(error_generic_member_access)]
 
 use error::convert::ConvertError;
-use model::Collection;
-use serde::Deserialize;
-use serde_derive::{Deserialize, Serialize};
-use serde_xml_rs::{de::Deserializer, from_str, to_string};
-use std::{collections::VecDeque, error::Error, fs, path::Path};
-use unipol::{Export, Folder};
-use utf16string::{WStr, LE};
+use serde_xml_rs::from_str;
 
 mod convert;
 pub mod error;
