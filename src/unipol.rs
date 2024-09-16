@@ -136,9 +136,9 @@ pub struct CorrectQuestionAnswer {
 #[derive(Deserialize, Debug, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct CorrectQuestionComplexAnswer {
-    pub point_value: u32,
-    pub dimension_1: u32,
-    pub dimension_2: u32,
+    pub point_value: i32,
+    pub dimension_1: i32,
+    pub dimension_2: i32,
     pub text_answer: String,
     pub answer_id: String,
 }

@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unipoll_export templateVersion="28.3.4.1" type="Folder" version="2">
+  <Folder xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Title>Teszt</Title>
+    <Description />
+    <Folders />
+    <Questions>
+      <Question Order="2105" Required="false" Type="Egysoros_szoveg" SkipNumbering="true" IsAddAnswerFromFiller="false">
+        <OtherOptionVisible>false</OtherOptionVisible>
+        <ColumnNum>-1</ColumnNum>
+        <CorrectAnswerValue>0</CorrectAnswerValue>
+        <InCorrectAnswerValue>0</InCorrectAnswerValue>
+        <Currency>0</Currency>
+        <QuestionEvaluation>281000</QuestionEvaluation>
+        <Measure>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId />
+            <ResourceType>294001</ResourceType>
+          </Resource>
+        </Measure>
+        <AllItemsRequired>false</AllItemsRequired>
+        <Decimals>-1</Decimals>
+        <Percentage>false</Percentage>
+        <MaxAnswers>-1</MaxAnswers>
+        <MaxLength>255</MaxLength>
+        <Format xsi:nil="true" />
+        <Scale>1</Scale>
+        <SurveyParameterName xsi:nil="true" />
+        <MaxValue />
+        <MinValue />
+        <DefaultValue />
+        <Description>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Description>
+        <Title>
+          <Resource>
+            <Text>Helyes válasz</Text>
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Title>
+        <DimensionX />
+        <DimensionY />
+        <PredefinedAnswers />
+        <ReuseableItems>false</ReuseableItems>
+        <IsUsingPartialPoints>false</IsUsingPartialPoints>
+        <CorrectQuestionAnswer>
+          <PointValue>0</PointValue>
+          <TextAnswer>helyes válasz</TextAnswer>
+        </CorrectQuestionAnswer>
+        <ElementsAreHidden>false</ElementsAreHidden>
+        <QuestionTags />
+        <IsContactInfo>false</IsContactInfo>
+        <Radius>0</Radius>
+        <DifferenceValue>0</DifferenceValue>
+        <QuestionImage xsi:nil="true" />
+        <CheckSpelling>false</CheckSpelling>
+        <IsPairing>false</IsPairing>
+        <DocumentId>-1</DocumentId>
+        <IsRandomAnswer>false</IsRandomAnswer>
+        <PartialAnswerValue>0</PartialAnswerValue>
+      </Question>
+      <Question Order="2106" Required="false" Type="Lista_egy_valaszthato_ertekkel_" SkipNumbering="true" IsAddAnswerFromFiller="false">
+        <OtherOptionVisible>false</OtherOptionVisible>
+        <ColumnNum>-1</ColumnNum>
+        <CorrectAnswerValue>0</CorrectAnswerValue>
+        <InCorrectAnswerValue>0</InCorrectAnswerValue>
+        <Currency>0</Currency>
+        <QuestionEvaluation>281000</QuestionEvaluation>
+        <Measure>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId />
+            <ResourceType>294001</ResourceType>
+          </Resource>
+        </Measure>
+        <AllItemsRequired>false</AllItemsRequired>
+        <Decimals>-1</Decimals>
+        <Percentage>false</Percentage>
+        <MaxAnswers>-1</MaxAnswers>
+        <MaxLength>255</MaxLength>
+        <Format>Radiogombok</Format>
+        <Scale>-1</Scale>
+        <SurveyParameterName xsi:nil="true" />
+        <MaxValue />
+        <MinValue />
+        <DefaultValue />
+        <Description>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Description>
+        <Title>
+          <Resource>
+            <Text>Egyszeres</Text>
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Title>
+        <DimensionX />
+        <DimensionY />
+        <PredefinedAnswers>
+          <ValueSet QuestionTypeId="110007">
+            <Id>194312339</Id>
+            <Name />
+            <Values>
+              <Value Order="0" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312345</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312343</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>A</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="1" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312349</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312347</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>B</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="2" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312353</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312351</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>C</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="3" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312357</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312355</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>D</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+            </Values>
+          </ValueSet>
+        </PredefinedAnswers>
+        <OtherOptionText>
+          <Resource>
+            <Text>Egyéb</Text>
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId />
+            <ResourceType>294001</ResourceType>
+          </Resource>
+        </OtherOptionText>
+        <ReuseableItems>false</ReuseableItems>
+        <IsUsingPartialPoints>false</IsUsingPartialPoints>
+        <CorrectQuestionAnswer>
+          <PointValue>0</PointValue>
+          <TextAnswer />
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>3</Dimension1>
+            <Dimension2>0</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+        </CorrectQuestionAnswer>
+        <ElementsAreHidden>false</ElementsAreHidden>
+        <QuestionTags />
+        <IsContactInfo>false</IsContactInfo>
+        <Radius>0</Radius>
+        <DifferenceValue>0</DifferenceValue>
+        <QuestionImage xsi:nil="true" />
+        <CheckSpelling>false</CheckSpelling>
+        <IsPairing>false</IsPairing>
+        <DocumentId>-1</DocumentId>
+        <IsRandomAnswer>false</IsRandomAnswer>
+        <PartialAnswerValue>0</PartialAnswerValue>
+      </Question>
+      <Question Order="2107" Required="false" Type="Lista_tobb_valaszthato_ertekkel_" SkipNumbering="true" IsAddAnswerFromFiller="false">
+        <OtherOptionVisible>false</OtherOptionVisible>
+        <ColumnNum>-1</ColumnNum>
+        <CorrectAnswerValue>0</CorrectAnswerValue>
+        <InCorrectAnswerValue>0</InCorrectAnswerValue>
+        <Currency>0</Currency>
+        <QuestionEvaluation>281000</QuestionEvaluation>
+        <Measure>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId />
+            <ResourceType>294001</ResourceType>
+          </Resource>
+        </Measure>
+        <AllItemsRequired>false</AllItemsRequired>
+        <Decimals>-1</Decimals>
+        <Percentage>false</Percentage>
+        <MaxAnswers>-1</MaxAnswers>
+        <MaxLength>255</MaxLength>
+        <Format xsi:nil="true" />
+        <Scale>-1</Scale>
+        <SurveyParameterName xsi:nil="true" />
+        <MaxValue />
+        <MinValue />
+        <DefaultValue />
+        <Description>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Description>
+        <Title>
+          <Resource>
+            <Text>Többszörös</Text>
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Title>
+        <DimensionX />
+        <DimensionY />
+        <PredefinedAnswers>
+          <ValueSet QuestionTypeId="110008">
+            <Id>194312375</Id>
+            <Name />
+            <Values>
+              <Value Order="0" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312381</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312379</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>A</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="1" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312385</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312383</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>B</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="2" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312389</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312387</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>C</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="3" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312393</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312391</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>D</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+            </Values>
+          </ValueSet>
+        </PredefinedAnswers>
+        <OtherOptionText>
+          <Resource>
+            <Text>Egyéb</Text>
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId />
+            <ResourceType>294001</ResourceType>
+          </Resource>
+        </OtherOptionText>
+        <ReuseableItems>false</ReuseableItems>
+        <IsUsingPartialPoints>false</IsUsingPartialPoints>
+        <CorrectQuestionAnswer>
+          <PointValue>0</PointValue>
+          <TextAnswer />
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>1</Dimension1>
+            <Dimension2>0</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>4</Dimension1>
+            <Dimension2>0</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+        </CorrectQuestionAnswer>
+        <ElementsAreHidden>false</ElementsAreHidden>
+        <QuestionTags />
+        <IsContactInfo>false</IsContactInfo>
+        <Radius>0</Radius>
+        <DifferenceValue>0</DifferenceValue>
+        <QuestionImage xsi:nil="true" />
+        <CheckSpelling>false</CheckSpelling>
+        <IsPairing>false</IsPairing>
+        <DocumentId>-1</DocumentId>
+        <IsRandomAnswer>false</IsRandomAnswer>
+        <PartialAnswerValue>0</PartialAnswerValue>
+      </Question>
+      <Question Order="2108" Required="false" Type="Tablazat_soronkent_egy_lehetseges_valasszal" SkipNumbering="true" IsAddAnswerFromFiller="false">
+        <OtherOptionVisible>false</OtherOptionVisible>
+        <ColumnNum>-1</ColumnNum>
+        <CorrectAnswerValue>0</CorrectAnswerValue>
+        <InCorrectAnswerValue>0</InCorrectAnswerValue>
+        <Currency>0</Currency>
+        <QuestionEvaluation>281000</QuestionEvaluation>
+        <Measure>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId />
+            <ResourceType>294001</ResourceType>
+          </Resource>
+        </Measure>
+        <AllItemsRequired>false</AllItemsRequired>
+        <Decimals>-1</Decimals>
+        <Percentage>false</Percentage>
+        <MaxAnswers>-1</MaxAnswers>
+        <MaxLength>255</MaxLength>
+        <Format xsi:nil="true" />
+        <Scale>-1</Scale>
+        <SurveyParameterName xsi:nil="true" />
+        <MaxValue />
+        <MinValue />
+        <DefaultValue />
+        <Description>
+          <Resource>
+            <Text />
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Description>
+        <Title>
+          <Resource>
+            <Text>Táblázat</Text>
+            <LCIDName>hu-HU</LCIDName>
+            <WebControlId xsi:nil="true" />
+            <ResourceType xsi:nil="true" />
+          </Resource>
+        </Title>
+        <DimensionX>
+          <ValueSet QuestionTypeId="110012">
+            <Id>194312479</Id>
+            <Name />
+            <Values>
+              <Value Order="0" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312485</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312483</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>A</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="1" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312489</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312487</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>B</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="2" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312493</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312491</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>C</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="3" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312497</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312495</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>D</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+            </Values>
+          </ValueSet>
+        </DimensionX>
+        <DimensionY />
+        <PredefinedAnswers>
+          <ValueSet QuestionTypeId="110012">
+            <Id>194312459</Id>
+            <Name />
+            <Values>
+              <Value Order="0" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312465</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312463</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>1</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="1" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312469</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312467</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>2</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="2" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312473</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312471</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>3</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+              <Value Order="3" Value="0" SurveyId="0" DefaultLCID="0" IsRespondentAnswer="false">
+                <Id>194312477</Id>
+                <ValueNullable xsi:nil="true" />
+                <Description />
+                <Text>194312475</Text>
+                <ResourceText>
+                  <Resource>
+                    <Text>4</Text>
+                    <LCIDName>hu-HU</LCIDName>
+                    <WebControlId xsi:nil="true" />
+                    <ResourceType xsi:nil="true" />
+                  </Resource>
+                </ResourceText>
+              </Value>
+            </Values>
+          </ValueSet>
+        </PredefinedAnswers>
+        <ReuseableItems>false</ReuseableItems>
+        <IsUsingPartialPoints>false</IsUsingPartialPoints>
+        <CorrectQuestionAnswer>
+          <PointValue>0</PointValue>
+          <TextAnswer />
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>1</Dimension1>
+            <Dimension2>1</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>2</Dimension1>
+            <Dimension2>2</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>3</Dimension1>
+            <Dimension2>3</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+          <CorrectQuestionComplexAnswer>
+            <PointValue>0</PointValue>
+            <Dimension1>4</Dimension1>
+            <Dimension2>4</Dimension2>
+            <TextAnswer />
+            <AnswerId>0</AnswerId>
+          </CorrectQuestionComplexAnswer>
+        </CorrectQuestionAnswer>
+        <ElementsAreHidden>false</ElementsAreHidden>
+        <QuestionTags />
+        <IsContactInfo>false</IsContactInfo>
+        <Radius>0</Radius>
+        <DifferenceValue>0</DifferenceValue>
+        <QuestionImage xsi:nil="true" />
+        <CheckSpelling>false</CheckSpelling>
+        <IsPairing>false</IsPairing>
+        <DocumentId>-1</DocumentId>
+        <IsRandomAnswer>false</IsRandomAnswer>
+        <PartialAnswerValue>0</PartialAnswerValue>
+      </Question>
+    </Questions>
+  </Folder>
+</unipoll_export>

@@ -168,7 +168,7 @@ impl TryFrom<&crate::unipol::Question> for AnswerWrapper {
                                 .ok_or(PredefinedAnswerError::NotFound)?;
 
                             Ok(Answer {
-                                answer_index: index as u32,
+                                answer_index: index as i32,
                                 option_index: c.dimension_2 - 1,
                             })
                         }

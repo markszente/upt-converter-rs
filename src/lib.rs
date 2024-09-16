@@ -40,12 +40,12 @@ fn convert_raw(content: &str) -> Result<Export, ConvertError> {
     Ok(result)
 }
 
-pub fn convert_to_folders() -> Result<(), Box<dyn Error>> {
+pub fn convert_to_folders(name: &str) -> Result<(), Box<dyn Error>> {
     let utf16 = open_utf16_file("A:/Chrome/Csoportosítás teszt/189788754.upt")?;
     let content = convert_to_utf8(&utf16)?;
     let result = convert_raw(&content)?;
     let folders = result.flatten_folders()?;
-    let collection = Collection::from(folders);
+    let collection = Collection::new(name, folders);
     // let first = result.folders;
     Ok(())
 }
@@ -65,7 +65,7 @@ mod tests {
         let content = include_str!("../assets/normalized/grouping.xml");
         let result = convert_raw(&content)?;
         let folders = result.flatten_folders()?;
-        let collection = Collection::from(folders);
+        let collection = Collection::new("test", folders);
 
         assert_eq!(collection.folders.len(), 1);
 
@@ -81,13 +81,17 @@ mod tests {
 
     #[test]
     fn test_other() -> Result<(), Box<dyn Error>> {
-        let utf16 = open_utf16_file("A:/Chrome/DzsidaOrsolyaKerdestar20210331/189788754.upt")?;
-        let content = convert_to_utf8(&utf16)?;
+        let content = include_str!("../assets/normalized/other.xml");
         let result = convert_raw(&content)?;
         let folders = result.flatten_folders()?;
-        let collection = Collection::from(folders);
+        let collection = Collection::new("test", folders);
 
-        //recursive(&first);
+        assert_eq!(collection.folders.len(), 1);
+
+        let folder = collection.folders.into_iter().next().unwrap();
+
+        assert_eq!(folder.questions.len(), 4);
+
         Ok(())
     }
 }

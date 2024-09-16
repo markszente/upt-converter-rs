@@ -1,6 +1,10 @@
+use std::collections::HashMap;
+
 use serde_derive::Deserialize;
 use serde_derive::{self, Serialize};
 
+use crate::convert::{get_all_questions_from_folder, get_valid_questions_from_folder};
+use crate::error::model::QuestionError;
 use crate::unipol;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -11,17 +15,50 @@ pub struct Collection {
 }
 
 impl Collection {
-    pub fn from(raw: Vec<unipol::Folder>) -> Collection {
-        let folders = raw
+    pub fn new(name: &str, folders: Vec<unipol::Folder>) -> Collection {
+        let folders = folders
             .iter()
-            .map(|f| Folder::from(f))
-            .filter_map(|f| f)
+            .map(|f| (f, get_valid_questions_from_folder(f)))
+            .map(|(folder, questions)| Folder::new(folder.title.as_ref(), questions))
             .collect();
 
         Collection {
-            name: String::from("test"),
+            name: name.to_string(),
             folders,
         }
+    }
+
+    /// Creates a collection with errors included
+    ///
+    /// Errors is hash map of indices of folder (as returned in `collection.folders`) and errors
+    pub fn new_with_error_details(
+        name: &str,
+        folders: Vec<unipol::Folder>,
+    ) -> (Collection, HashMap<usize, Vec<QuestionError>>) {
+        let (folders, errors) = folders
+            .iter()
+            .map(|f| (f, get_all_questions_from_folder(f)))
+            .enumerate()
+            .map(|(i, (folder, questions_and_errors))| {
+                let (questions, errors): (Vec<_>, Vec<_>) =
+                    questions_and_errors.into_iter().partition(|r| r.is_ok());
+
+                let questions = questions.into_iter().map(|q| q.unwrap()).collect();
+
+                let errors = errors.into_iter().map(|q| q.unwrap_err()).collect();
+
+                let folder = Folder::new(folder.title.as_ref(), questions);
+
+                (folder, (i, errors))
+            })
+            .collect();
+
+        let collection = Collection {
+            name: name.to_string(),
+            folders,
+        };
+
+        (collection, errors)
     }
 }
 
@@ -33,26 +70,12 @@ pub struct Folder {
 }
 
 impl Folder {
-    fn from(raw: &unipol::Folder) -> Option<Folder> {
-        let name = match &raw.title {
-            Some(t) => String::from(t),
-            None => String::from("unknown"),
-        };
-        let questions = match &raw.questions {
-            Some(question_wrapper) => {
-                let questions = question_wrapper
-                    .question
-                    .iter()
-                    .flatten()
-                    .map(|q| Question::from(q))
-                    .filter_map(|q| q)
-                    .collect();
-                questions
-            }
-            None => return None,
-        };
+    fn new<T: AsRef<str>>(name: Option<T>, questions: Vec<Question>) -> Folder {
+        let name = name
+            .map(|n| n.as_ref().to_string())
+            .unwrap_or_else(|| "Unnamed".to_string());
 
-        Some(Folder { name, questions })
+        Folder { name, questions }
     }
 }
 
@@ -64,21 +87,6 @@ pub enum QuestionType {
     MultipleAnswers = 2,
     Table = 3, // not sure about the naming here
     Group = 4,
-}
-
-impl QuestionType {
-    fn from(raw: &str) -> Option<QuestionType> {
-        let result = match raw {
-            "Egysoros_szoveg" => Some(QuestionType::ExactText),
-            "Lista_egy_valaszthato_ertekkel_" => Some(QuestionType::SingleAnswer),
-            "Lista_tobb_valaszthato_ertekkel_" => Some(QuestionType::MultipleAnswers),
-            "Tablazat_soronkent_egy_lehetseges_valasszal" => Some(QuestionType::Table),
-            "Csoportokba_rendezes" => Some(QuestionType::Group),
-            _ => None,
-        };
-
-        result
-    }
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -93,52 +101,6 @@ pub struct Question {
     pub answer: AnswerWrapper,
 }
 
-impl Question {
-    pub fn from(raw: &unipol::Question) -> Option<Question> {
-        // todo: unique return type
-        let text = String::from(&raw.title.resource.text);
-        let question_type = match QuestionType::from(&raw.r#type) {
-            Some(t) => t,
-            None => return None,
-        };
-        let answer = AnswerWrapper::from(raw, &question_type);
-
-        let possible_answers = match raw.predefined_answers.value_set.as_ref() {
-            Some(set) => set
-                .values
-                .value
-                .iter()
-                .map(|v| String::from(&v.resource_text.resource.text))
-                .collect(),
-            None => vec![],
-        };
-
-        let option_source = match question_type {
-            QuestionType::Table => raw.dimension_x.value_set.as_ref(),
-            QuestionType::Group => raw.dimension_y.value_set.as_ref(),
-            _ => None,
-        };
-
-        let possible_options = match option_source {
-            Some(source) => source
-                .values
-                .value
-                .iter()
-                .map(|v| String::from(&v.resource_text.resource.text))
-                .collect(),
-            None => vec![],
-        };
-
-        Some(Question {
-            text,
-            question_type,
-            answer,
-            possible_answers,
-            possible_options,
-        })
-    }
-}
-
 #[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct AnswerWrapper {
@@ -147,89 +109,9 @@ pub struct AnswerWrapper {
     pub answers: Vec<Answer>,
 }
 
-impl AnswerWrapper {
-    pub fn from(raw: &unipol::Question, r#type: &QuestionType) -> AnswerWrapper {
-        let single_answer = match r#type {
-            QuestionType::ExactText => {
-                let single_answer = String::from(&raw.correct_question_answer[0].text_answer);
-                Some(single_answer)
-            }
-            _ => None,
-        };
-
-        let text_answers = match r#type {
-            QuestionType::ExactText => raw
-                .correct_question_answer
-                .iter()
-                .map(|c| String::from(&c.text_answer))
-                .collect::<Vec<_>>(),
-            _ => vec![], // this is by API design, might want to change?
-        };
-
-        let answers = if *r#type == QuestionType::ExactText {
-            vec![] // I don't like it
-        } else {
-            raw.correct_question_answer[0]
-                .correct_question_complex_answer
-                .as_ref()
-                .expect("no complex answer")
-                .iter()
-                .filter(|&c| {
-                    if raw.is_using_partial_points {
-                        c.point_value > 0
-                    } else {
-                        true
-                    }
-                })
-                .map(|c| {
-                    match r#type {
-                        QuestionType::Table => {
-                            // this is necessary because for tables,
-                            // "DimensionX" becomes the answers... Why...
-                            Answer {
-                                answer_index: c.dimension_2 - 1,
-                                option_index: c.dimension_1 - 1,
-                            }
-                        }
-                        QuestionType::Group => {
-                            // Where do I get started, lmao. They've abandoned the whole """index""" logic (which doesn't start with 0, *facepalm*),
-                            // In favor of using AnswerId. Yeah. Why. If you're stupid, at least be consistent about it
-                            let index = raw
-                                .predefined_answers
-                                .value_set
-                                .as_ref()
-                                .expect("no value set")
-                                .values
-                                .value
-                                .iter()
-                                .position(|v| v.id == c.answer_id)
-                                .expect("index not found");
-
-                            Answer {
-                                answer_index: index as u32,
-                                option_index: c.dimension_2 - 1,
-                            }
-                        }
-                        _ => Answer {
-                            answer_index: c.dimension_1 - 1,
-                            option_index: c.dimension_2 - 1,
-                        },
-                    }
-                })
-                .collect()
-        };
-
-        AnswerWrapper {
-            single_answer,
-            text_answers,
-            answers,
-        }
-    }
-}
-
 #[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Answer {
-    pub answer_index: u32,
-    pub option_index: u32,
+    pub answer_index: i32,
+    pub option_index: i32,
 }
