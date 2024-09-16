@@ -34,8 +34,7 @@ mod tests {
     fn test_group() -> Result<(), Box<dyn Error>> {
         let content = include_str!("../assets/normalized/grouping.xml");
         let result = convert_raw(&content)?;
-        let folders = result.flatten_folders()?;
-        let collection = Collection::new("test", folders);
+        let collection = Collection::new("test", result)?;
 
         assert_eq!(collection.folders.len(), 1);
 
@@ -53,8 +52,7 @@ mod tests {
     fn test_other() -> Result<(), Box<dyn Error>> {
         let content = include_str!("../assets/normalized/other.xml");
         let result = convert_raw(&content)?;
-        let folders = result.flatten_folders()?;
-        let collection = Collection::new("test", folders);
+        let collection = Collection::new("test", result)?;
 
         assert_eq!(collection.folders.len(), 1);
 
