@@ -11,8 +11,14 @@ mod cli;
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    let file = cli.file;
-    let file_name = file.file_stem().unwrap().to_str().unwrap().to_string(); //TODO: clean this mess up
+    let file = &cli.file;
+
+    let file_name = file
+        .file_stem()
+        .and_then(|file_name| file_name.to_str())
+        .unwrap_or("unnamed collection")
+        .to_string();
+
     let export = get_export_from_path(file)?;
 
     let name = match cli.name {
@@ -31,7 +37,6 @@ fn main() -> Result<()> {
     }
 
     Ok(())
-    // Continued program logic goes here...
 }
 
 fn get_export_from_path<P: AsRef<Path>>(path: P) -> Result<Export> {
