@@ -1,68 +1,11 @@
-use std::collections::HashMap;
-
 use serde_derive::Deserialize;
 use serde_derive::{self, Serialize};
-
-use crate::convert::{get_all_questions_from_folder, get_valid_questions_from_folder};
-use crate::error::model::QuestionError;
-use crate::error::unipol::UnipolError;
-use crate::unipol;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Collection {
     pub name: String,
     pub folders: Vec<Folder>,
-}
-
-impl Collection {
-    pub fn new(name: &str, export: unipol::Export) -> Result<Collection, UnipolError> {
-        let folders = export.flatten_folders()?;
-        let folders = folders
-            .iter()
-            .map(|f| (f, get_valid_questions_from_folder(f)))
-            .map(|(folder, questions)| Folder::new(folder.title.as_ref(), questions))
-            .collect();
-
-        Ok(Collection {
-            name: name.to_string(),
-            folders,
-        })
-    }
-
-    /// Creates a collection with errors included
-    ///
-    /// Errors is hash map of indices of folder (as returned in `collection.folders`) and errors
-    pub fn new_with_error_details(
-        name: &str,
-        export: unipol::Export,
-    ) -> Result<(Collection, HashMap<usize, Vec<QuestionError>>), UnipolError> {
-        let folders = export.flatten_folders()?;
-        let (folders, errors) = folders
-            .iter()
-            .map(|f| (f, get_all_questions_from_folder(f)))
-            .enumerate()
-            .map(|(i, (folder, questions_and_errors))| {
-                let (questions, errors): (Vec<_>, Vec<_>) =
-                    questions_and_errors.into_iter().partition(|r| r.is_ok());
-
-                let questions = questions.into_iter().map(|q| q.unwrap()).collect();
-
-                let errors = errors.into_iter().map(|q| q.unwrap_err()).collect();
-
-                let folder = Folder::new(folder.title.as_ref(), questions);
-
-                (folder, (i, errors))
-            })
-            .collect();
-
-        let collection = Collection {
-            name: name.to_string(),
-            folders,
-        };
-
-        Ok((collection, errors))
-    }
 }
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
@@ -73,7 +16,7 @@ pub struct Folder {
 }
 
 impl Folder {
-    fn new<T: AsRef<str>>(name: Option<T>, questions: Vec<Question>) -> Folder {
+    pub(crate) fn new<T: AsRef<str>>(name: Option<T>, questions: Vec<Question>) -> Folder {
         let name = name
             .map(|n| n.as_ref().to_string())
             .unwrap_or_else(|| "Unnamed".to_string());

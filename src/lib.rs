@@ -1,26 +1,16 @@
 #![feature(error_generic_member_access)]
 
-use error::convert::ConvertError;
-use serde_xml_rs::from_str;
-
-mod convert;
+pub mod conversion;
 pub mod error;
-mod macros;
 pub mod model;
 pub mod unipol;
 
-pub fn convert_raw(content: &str) -> Result<crate::unipol::Export, ConvertError> {
-    let result: crate::unipol::Export = from_str(content)?;
-    Ok(result)
-}
-
 #[cfg(test)]
 mod tests {
-    use std::collections::HashMap;
-
+    use crate::model::Collection;
+    use conversion::convert_raw;
     use model::QuestionType;
-
-    use crate::model::Question;
+    use std::error::Error;
 
     use super::*;
 

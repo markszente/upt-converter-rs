@@ -1,11 +1,10 @@
-use std::{
-    fs,
-    path::Path,
-};
+use std::{fs, path::Path};
 
 use clap::Parser;
 use cli::Cli;
-use upt_converter::{convert_raw, error::convert::ConvertError, model::Collection, unipol::Export};
+use upt_converter::{
+    conversion::convert_raw, error::conversion::ConvertError, model::Collection, unipol::Export,
+};
 use utf16string::{WStr, LE};
 
 mod cli;
