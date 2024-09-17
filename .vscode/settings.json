@@ -1,0 +1,3 @@
+{
+    "rust-analyzer.linkedProjects": ["upt-converter/Cargo.toml", "upt-converter-cli/Cargo.toml"]
+}
