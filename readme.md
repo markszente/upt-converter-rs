@@ -24,7 +24,7 @@ The output format of the conversion is flattened in nature, ie. subfolders are r
 
 #### Types
 
-##### Export
+##### Collection
 
 This is the top-level object that is generated
 
@@ -42,23 +42,23 @@ This is the top-level object that is generated
 
 ##### Question
 
-| Property            | Type             | Note                                                                                  |
-| ------------------- | ---------------- | ------------------------------------------------------------------------------------- |
-| `text`            | `string`       | The body of the question                                                              |
-| `type`            | `QuestionType` | Enum                                                                                  |
-| `possibleAnswers` | `string[]`     | Empty when type is `ExactText`                                                      |
-| `possibleOptions` | `string[]`     | Possible options. Only applicable for `MultipleAnswers`, `Table` and `Grouping` |
-| `answers`         | `Answer`       | Despite the naming, it's a single object                                              |
+| Property            | Type              | Note                                                                                  |
+| ------------------- | ----------------- | ------------------------------------------------------------------------------------- |
+| `text`            | `string`        | The body of the question                                                              |
+| `type`            | `QuestionType`  | Enum                                                                                  |
+| `possibleAnswers` | `string[]`      | Empty when type is `ExactText`                                                      |
+| `possibleOptions` | `string[]`      | Possible options. Only applicable for `MultipleAnswers`, `Table` and `Grouping` |
+| `answers`         | `AnswerWrapper` | Despite the naming, it's a single object                                              |
 
-##### Answer
+##### AnswerWrapper
 
 | Property         | Type              | Note                        |
 | ---------------- | ----------------- | --------------------------- |
 | `singleAnswer` | `string \| null` | Deprecated                  |
 | `textAnswers`  | `string[]`      | All valid free text answers |
-| `answers`      | `AnswerIndex[]` | Non-free text answers       |
+| `answers`      | `Answer[]`      | Non-free text answers       |
 
-##### AnswerIndex
+##### Answer
 
 | Property        | Type       | Note                                                       |
 | --------------- | ---------- | ---------------------------------------------------------- |

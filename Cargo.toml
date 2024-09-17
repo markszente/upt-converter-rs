@@ -13,10 +13,3 @@ serde_json = "1.0"
 utf16string = "0.2"
 thiserror = "1.0.63"
 clap = { version = "4.5.17", features = ["derive"] }
-
-[dev-dependencies]
-criterion = "0.3"
-
-[[bench]]
-name = "my_benchmark"
-harness = false
