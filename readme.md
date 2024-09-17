@@ -40,7 +40,7 @@ This is the top-level object that is generated
 | `name`      | `string`     |      |
 | `questions` | `Question[]` |      |
 
-###### Question
+##### Question
 
 | Property            | Type             | Note                                                                                  |
 | ------------------- | ---------------- | ------------------------------------------------------------------------------------- |
