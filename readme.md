@@ -14,6 +14,8 @@ Of course, being a proprietary format, .upt files needed to be "reverse engineer
 
 However, it's worth noting that only a subset of the format is being used in this conversion, both horizontally (ie. the numbed of questions types that may be converted) and vertically (ie. the number of features on any one question). This is due to the ultimate business requirement, the output format.
 
+This tool is a rewrite of the original one, written in Go.
+
 ### CLI tool
 
 TODO.
