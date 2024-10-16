@@ -35,7 +35,7 @@ impl Collection {
 
     /// Creates a collection with errors included
     ///
-    /// Errors is hash map of indices of folder (as returned in `collection.folders`) and errors
+    /// Errors is a vec of errors for each folder (corresponding to `collection.folders`)
     pub fn new_with_error_details(
         name: &str,
         export: unipol::Export,
@@ -98,7 +98,6 @@ impl TryFrom<&crate::unipol::Question> for Question {
     type Error = QuestionError;
 
     fn try_from(value: &crate::unipol::Question) -> Result<Self, Self::Error> {
-        // todo: unique return type
         let text = value.title.resource.text.to_string();
         let question_type = QuestionType::try_from(value.r#type.as_str())?;
         let answer = AnswerWrapper::try_from(value)?;
@@ -184,11 +183,11 @@ impl TryFrom<&crate::unipol::Question> for AnswerWrapper {
                 .iter()
                 .map(|c| String::from(&c.text_answer))
                 .collect::<Vec<_>>(),
-            _ => vec![], // this is by API design, might want to change?
+            _ => vec![], // FIXME: this is by API design, might want to change?
         };
 
         let answers: Result<Vec<_>, AnswerError> = if question_type == QuestionType::ExactText {
-            Ok(vec![]) // I don't like it
+            Ok(vec![]) // FIXME: I don't like it
         } else {
             value
                 .correct_question_answer
@@ -209,15 +208,15 @@ impl TryFrom<&crate::unipol::Question> for AnswerWrapper {
                     match question_type {
                         QuestionType::Table => {
                             // this is necessary because for tables,
-                            // "DimensionX" becomes the answers... Why...
+                            // "DimensionX" becomes the answers...
                             Ok(Answer {
                                 answer_index: c.dimension_2 - 1,
                                 option_index: c.dimension_1 - 1,
                             })
                         }
                         QuestionType::Group => {
-                            // Where do I get started, lmao. They've abandoned the whole """index""" logic (which doesn't start with 0, *facepalm*),
-                            // In favor of using AnswerId. Yeah. Why. If you're stupid, at least be consistent about it
+                            // They seem to have abandoned the "dimension" logic (which is essentially a non-zero-based index...)
+                            // In favor of using AnswerId. Yeah. Consistency
                             let index = value
                                 .predefined_answers
                                 .value_set
