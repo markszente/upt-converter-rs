@@ -53,8 +53,7 @@ fn open_utf16_file<P: AsRef<Path>>(path: P) -> Result<Vec<u8>> {
 
 /// Converts a UTF16LE file to String
 fn convert_to_utf8(utf16: &[u8]) -> Result<String> {
-    let s0: &WStr<LE> = WStr::from_utf16(utf16)?;
-
+    let content: &WStr<LE> = WStr::from_utf16(utf16)?;
     let content = s0.to_utf8();
     Ok(content)
 }
